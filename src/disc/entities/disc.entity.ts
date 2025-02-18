@@ -17,8 +17,10 @@ export class Disc {
   @Column({ length: 10000, nullable: true  })
   about: string;
 
-  /* previous relationship if any */
-  @ManyToOne(() => User)
-  @JoinColumn({ name: 'email' })
-  email: User;
+  @Column({ length: 255 }) // Kolumn som lagrar e-postadressen
+  email: string;
+
+  @ManyToOne(() => User, { onDelete: 'CASCADE', onUpdate: 'CASCADE' }) // Specificera onDelete och onUpdate
+  @JoinColumn({ name: 'email', referencedColumnName: 'email' }) // Skapar en relation via e-postkolumnen
+  user: User;
 }

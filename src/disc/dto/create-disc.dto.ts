@@ -16,8 +16,4 @@ export class CreateDiscDto {
     @IsNotEmpty()
     about: string;
 
-    @IsEmail()
-    @IsString()
-    @IsNotEmpty()
-    email: string;
 }
