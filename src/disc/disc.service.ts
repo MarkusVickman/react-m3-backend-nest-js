@@ -51,7 +51,7 @@ export class DiscService {
   // Hämta object från databasen och inkludera användarnamn
   const response = await this.discRepository.createQueryBuilder('disc')
     .leftJoinAndSelect('disc.user', 'user', 'user.email = disc.email') // Specificera join-villkor
-    .select(['disc.id', 'disc.heading', 'disc.date', 'disc.about', 'disc.email', 'user.name as name']) // Välj nödvändiga fält
+    .select(['disc.id as id', 'disc.heading as heading', 'disc.date as date', 'disc.about as about', 'disc.email as email', 'user.name as name']) // Välj nödvändiga fält
     .getRawMany();
 
     //Hämtar object från databasen
