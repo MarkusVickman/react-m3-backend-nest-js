@@ -47,8 +47,15 @@ export class DiscService {
 
   //Metod för att hämta alla discar
   async findAll(): Promise<Disc[]> {
+
+  // Hämta object från databasen och inkludera användarnamn
+  const response = await this.discRepository.createQueryBuilder('disc')
+    .leftJoinAndSelect('disc.user', 'user', 'user.email = disc.email') // Specificera join-villkor
+    .select(['disc.id', 'disc.heading', 'disc.date', 'disc.about', 'disc.email', 'user.name as name']) // Välj nödvändiga fält
+    .getRawMany();
+
     //Hämtar object från databasen
-    let response = await this.discRepository.find();
+    //let response = await this.discRepository.find();
     //Vid fel skickas ett felmeddelande som svar istället
     if (!response) { throw new NotFoundException('GET: Find all failed.'); }
     return response;
