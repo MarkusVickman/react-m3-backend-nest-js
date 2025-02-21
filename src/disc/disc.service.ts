@@ -85,14 +85,13 @@ export class DiscService {
 
   //Metod för att hitta och uppdatera en disc med dess id
   async update(id: number, message: UpdateDiscDto, @CurrentUser() user): Promise<Disc> {
+    //Uppdaterar ett objekt 
+    const response = await this.discRepository.findOne({ where: { id } });
 
-    if (message.email !== user.email) {
+    if (response.email !== user.email) {
       throw new ForbiddenException('Permission denied! wrong email');
     }
 
-
-    //Uppdaterar ett objekt 
-    const response = await this.discRepository.findOne({ where: { id } });
     //Vid fel skickas ett felmeddelande som svar istället
     if (!response) { throw new NotFoundException('PUT: Update failed.'); }
     return await this.discRepository.save(Object.assign(response, message));

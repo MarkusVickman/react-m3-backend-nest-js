@@ -4,8 +4,4 @@ import { IsString, IsInt, IsOptional, Length, IsNotEmpty, IsEmail } from 'class-
 
 export class UpdateDiscDto extends PartialType(CreateDiscDto) {
 
-    @IsEmail()
-    @IsString()
-    @IsNotEmpty()
-    email: string;
 }

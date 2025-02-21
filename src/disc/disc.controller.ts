@@ -27,14 +27,12 @@ export class DiscController {
   }
 
   //Alla getanrop till /disc initierar findAll-metoden i disc.service.
-  @UseGuards(AuthGuard)
   @Get('user')
   findUserSpecific(@Request() req) {
     return this.discService.findUserSpecific(req.user);
   }
 
   //Alla getanrop till /disc/id initierar findOne-metoden i disc.service. Id skickas med som "adressrads"-parameter skickas med som argument
-  @UseGuards(AuthGuard)
   @Get('/:id')
   findOne(@Param('id') id: string) {
     return this.discService.findOne(+id);
