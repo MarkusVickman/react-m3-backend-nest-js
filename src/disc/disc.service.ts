@@ -88,7 +88,7 @@ export class DiscService {
     //Uppdaterar ett objekt 
     const response = await this.discRepository.findOne({ where: { id } });
 
-    if (response.email !== user.email) {
+    if (response.email !== user.email && user.isAdmin === false) {
       throw new ForbiddenException('Permission denied! wrong email');
     }
 
@@ -103,7 +103,7 @@ export class DiscService {
     // Hämta användaren baserat på e-postadress
     const disc = await this.discRepository.findOne({ where: { id } });
 
-    if (disc.email !== user.email) {
+    if(disc.email !== user.email && user.isAdmin === false) {
       throw new ForbiddenException('Permission denied! wrong email');
     }
 
